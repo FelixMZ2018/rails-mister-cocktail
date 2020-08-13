@@ -1,0 +1,17 @@
+
+
+<h1><%=@cocktail.name%></h2>
+<% @cocktail.doses.each do |dose| %>
+         <%= dose.description%> <%= dose.ingredient.name %> 
+        </div>
+      </div>
+    <% end %>
+
+
+      <h2>Add a Ingredient</h2>
+      <%= simple_form_for [@cocktail, @dose] do |f| %>
+        <%= f.input :ingredient_id,collection: @ingredients %>
+        <%= f.input :description %>
+
+        <%= f.submit 'Add Ingredient', class: 'btn btn-success' %>
+      <% end %>
