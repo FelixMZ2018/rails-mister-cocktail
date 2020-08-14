@@ -29,9 +29,25 @@ ng = {name: "Negroni", description: "Easy to make and refreshingly bitter, the N
 co = {name: "Cosmopolitan", description: "The legendary Cosmopolitan is a simple cocktail with a big history. It reached its height of popularity in the 1990s, when the HBO show “Sex and the City” was at its peak. The pink-hued Martini was a favorite of the characters on the show.",rating: rand(0..5)}
 sf = {name: "Suffering Bastard", description: "So many classic cocktails are born in the bars of great hotels. Originally conceived as a hangover cure by the bar staff at Cairo’s Shepherd’s Hotel (before it burned to the ground in 1952), this bourbon- and gin-based drink has been around for 70 years.",rating: rand(0..5)}
 wr = {name: "White Russian", description: "The White Russian is both decadent and easy to make. Combining vodka, Kahlúa and cream and serving it on the rocks create a delicious alternative to adult milkshakes.",rating: rand(0..5)}
-Cocktail.create(bd)
-Cocktail.create(ng)
-Cocktail.create(co)
-Cocktail.create(sf)
-Cocktail.create(wr)
+cocktail = Cocktail.new(bd)
+file = URI.open("https://res.cloudinary.com/dg106nng3/image/upload/v1597408436/oztqqg675wb2jw0841pde4ho1gaa.jpg")
+cocktail.photos.attach(io: file, filename: 'bd.jpg', content_type: 'image/jpg')
+cocktail.save
 
+cocktail = Cocktail.new(ng)
+cocktail.save
+
+cocktail = Cocktail.new(co)
+file = URI.open("https://res.cloudinary.com/dg106nng3/image/upload/v1597402800/0ccsl8nimxfd3zt8dtagw8bzag84.jpg")
+cocktail.photos.attach(io: file, filename: 'co.jpg', content_type: 'image/jpg')
+cocktail.save
+
+cocktail = Cocktail.new(sf)
+file = URI.open("https://res.cloudinary.com/dg106nng3/image/upload/v1597402346/11qzolw3t88qdvotrkapbgvi20qb.jpg")
+cocktail.photos.attach(io: file, filename: 'sf.jpg', content_type: 'image/jpg')
+cocktail.save
+
+cocktail = Cocktail.new(wr)
+file = URI.open("https://res.cloudinary.com/dg106nng3/image/upload/v1597410924/whiterussian_bjda7h.jpg")
+cocktail.photos.attach(io: file, filename: 'wr.jpg', content_type: 'image/jpg')
+cocktail.save
