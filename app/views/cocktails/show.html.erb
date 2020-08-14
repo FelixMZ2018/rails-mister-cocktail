@@ -1,33 +1,39 @@
 <div class="container pt-5">
     <div class="banner">
         <h1><%=@cocktail.name%></h2>
+    </div>
+    <% unless @cocktail.photos.attached? %>
+    <h2> There is no picture :(,Would you like to add one now ?</h2>
+    <%= simple_form_for [@cocktail] do |f| %>
+    <%= f.input :photos, as: :file %>
+    <%= f.submit 'Change Cocktail', class: 'btn btn-success' %>
+    <%end%>
+    <%end%>
+    <div class="container d-inline-flex">
+        <div class="flex-grow-1 p-2 card">
+        <div class="card-body m-2">
+            <p><%=@cocktail.instructions%></p>
         </div>
-        <% unless @cocktail.photos.attached? %>
-        <h2> There is no picture :(,Would you like to add one now ?</h2>
-        <%= simple_form_for [@cocktail] do |f| %>
-        <%= f.input :photos, as: :file %>
-        <%= f.submit 'Change Cocktail', class: 'btn btn-success' %>
-        <%end%>    
-                <%end%>    
-<div class="container">
+        </div>
+        <div class="m-2">
+        <h3>Ingredients</h3>
+        <ul class="list-group m-2 pb-2">
+            <% @cocktail.doses.each do |dose| %>
+            <li class="list-group-item"><%= dose.description%> - <%= dose.ingredient.name%>
+                <%= link_to "Delete", dose_path(dose), method: :delete, data: { confirm: 'Are you sure you want to delete' }%>
+            </li>
+            <% end %>
+        </ul>
+        <hr>
+        <h4>Add a Ingredient</h4>
+        <%= simple_form_for [@cocktail, @dose] do |f| %>
+        <%= f.input :ingredient_id,collection: @ingredients %>
+        <%= f.input :description %>
 
-            <h3>Ingredients</h3>
-            <ul class="list-group pb-2">
-                <% @cocktail.doses.each do |dose| %>
-                <li class="list-group-item"><%= dose.description%> - <%= dose.ingredient.name%>
-                    <%= link_to "Delete", dose_path(dose), method: :delete, data: { confirm: 'Are you sure you want to delete' }%>
-                </li>
-                <% end %>
-            </ul>
-    <hr>
-    <h4>Add a Ingredient</h4>
-    <%= simple_form_for [@cocktail, @dose] do |f| %>
-    <%= f.input :ingredient_id,collection: @ingredients %>
-    <%= f.input :description %>
-
-    <%= f.submit 'Add Ingredient', class: 'btn btn-success m-2' %>
-    <% end %>
-
+        <%= f.submit 'Add Ingredient', class: 'btn btn-success m-2' %>
+        <% end %>
+        </div>
+    </div>
     <%= link_to  "Back", cocktails_path, class: "btn btn-success m-2"%>
     <%= link_to  "Delete", cocktail_path ,method: :delete, class: "btn btn-success m-2", data: { confirm: 'Are you sure you want to delete' }%>
     <%= link_to  "Edit", edit_cocktail_path ,method: :get, class: "btn btn-success m-2"%>
