@@ -15,10 +15,13 @@ class DosesController < ApplicationController
           render :new
         end
     end
+
+
     
     def destroy
         @dose = Dose.find(params[:id])
         @dose.destroy
+        redirect_back(fallback_location: root_path)
 
     end
     
