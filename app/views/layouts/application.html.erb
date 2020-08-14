@@ -12,8 +12,11 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-<%= link_to  "Cocktails", cocktails_path %>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light sticky-top">
+  <div class="navbar-nav">
+<%= link_to  "All Cocktails", cocktails_path , class: "nav-item p-2"%>
+<%= link_to  "New Cocktails", new_cocktail_path , class: "nav-item p-2" %>
+</div>
 </nav>
     <%= yield %>
   </body>
