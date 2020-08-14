@@ -3,9 +3,13 @@
     <%= simple_form_for [@cocktail] do |f| %>
     <%= f.input :name %>
     <%= f.input :description %>
+    <%= f.input :instructions%>
     <%= f.input :photos, as: :file %>
-    <%= f.submit 'Add Cocktail', class: 'btn btn-success' %>
+     <div class="row justify-content-between">
+    <%= link_to  "Back", cocktails_path, class: "btn btn-success col-4"%>
+
+    <%= f.submit 'Add Cocktail', class: 'btn btn-success col-4' %>
+    </div>
     <% end %>
     <hr>
-    <%= link_to  "Back", cocktails_path, class: "btn btn-success"%>
 </div>
