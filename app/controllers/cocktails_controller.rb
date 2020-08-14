@@ -21,7 +21,7 @@ class CocktailsController < ApplicationController
         @cocktail = Cocktail.new(cocktail_params)
 
         if @cocktail.save
-          redirect_to @cocktail, notice: 'cocktail was successfully created.'
+          redirect_to @cocktail, notice: 'Cocktail was successfully created.'
         else
           render :new
         end
@@ -30,7 +30,7 @@ class CocktailsController < ApplicationController
     def update
         @cocktail = Cocktail.find(params[:id])
         if @cocktail.update(cocktail_params)
-          redirect_to @cocktail, notice: 'Garden was successfully updated.'
+          redirect_to @cocktail, notice: 'Cocktail was successfully updated.'
         else
           render :edit
         end
@@ -40,6 +40,7 @@ class CocktailsController < ApplicationController
     def destroy
         @cocktail = Cocktail.find(params[:id])
         @cocktail.destroy
+        @cocktail.photos.purge
     redirect_to cocktails_path
 
     end
@@ -47,7 +48,7 @@ class CocktailsController < ApplicationController
     private
 
     def cocktail_params
-        params.require(:cocktail).permit(:name, :image_url, :description)
+        params.require(:cocktail).permit(:name, :photos, :description)
     end
 
     
